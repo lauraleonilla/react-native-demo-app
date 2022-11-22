@@ -1,14 +1,16 @@
+import { React, useEffect, useState } from "react";
 import {
+  Image,
   KeyboardAvoidingView,
   StyleSheet,
+  Text,
   TextInput,
+  TouchableOpacity,
   View,
 } from "react-native";
-import { React, useEffect, useState } from "react";
-import { useNavigation } from "@react-navigation/core";
 import { useDispatch } from "react-redux";
+import { useNavigation } from "@react-navigation/core";
 import { auth } from "../firebase";
-import ActionButton from "../components/ActionButton";
 import { setUser } from "../slices/userSlice";
 
 const LoginScreen = () => {
@@ -27,6 +29,10 @@ const LoginScreen = () => {
     });
   }, []);
 
+  const moveToRegisterPage = () => {
+    navigation.navigate("Register");
+  };
+
   const handleSignUp = () => {
     auth
       .createUserWithEmailAndPassword(email, password)
@@ -43,7 +49,6 @@ const LoginScreen = () => {
       .then((userCredentials) => {
         const user = userCredentials.user;
         if (user) {
-          console.log("LÖL", user);
           dispatch(setUser(user));
           navigation.navigate("Home");
         }
@@ -54,6 +59,8 @@ const LoginScreen = () => {
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
+      <Text style={styles.h1}>RecyclApp</Text>
+      <Image source={require("../assets/recyclapp2.png")} />
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Email"
@@ -69,10 +76,17 @@ const LoginScreen = () => {
           secureTextEntry
         />
       </View>
-
       <View style={styles.buttonContainer}>
-        <ActionButton onPress={handleLogin} buttonText="Login" />
-        <ActionButton onPress={handleSignUp} buttonText="Register" />
+        <TouchableOpacity onPress={handleLogin} style={styles.button}>
+          <Text style={styles.buttonText}>Login</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={moveToRegisterPage}
+          style={[styles.button, styles.buttonOutline]}
+        >
+          <Text style={styles.buttonOutlineText}>Register here</Text>
+        </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
   );
@@ -85,6 +99,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "#99E4F0",
+    marginTop: -100,
   },
   inputContainer: {
     width: "80%",

@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#058F1B",
     borderRadius: "20%",
+    marginTop: "5%",
   },
   buttonText: {
     color: "white",
