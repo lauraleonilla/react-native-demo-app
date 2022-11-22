@@ -39,7 +39,7 @@ const LoginScreen = () => {
     behavior="padding"
     >
       <Text style={styles.h1}>RecyclApp</Text>
-      <Image source={require('../assets/recyclapp1.png')} />
+      <Image source={require('../assets/recyclapp2.png')} />
     <View style={styles.inputContainer}>
       <TextInput
       placeholder="Email"
