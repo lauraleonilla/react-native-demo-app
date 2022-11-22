@@ -37,18 +37,53 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "#99E4F0",
+    marginTop: -100,
   },
-  button: {
-    backgroundColor:"lightblue",
-    width: "60%",
-    padding: 15,
-    borderRadius: 10,
-    alignItems: "center",
-    marginTop: 40,
-  },
-  buttonText: {
-    color: "black",
-    fontWeight: "700",
-    fontSize: 16,
-  },
+inputContainer: {
+  width:"80%",
+  
+},
+h1: {
+  fontSize: 32,
+},
+
+input: {
+  backgroundColor:"white",
+  paddingHorizontal: 15,
+  paddingVertical:10,
+  borderRadius: 24,
+  marginTop: 15,
+}, 
+buttonContainer: {
+  width: "60%",
+  justifyContent: "center",
+  alignItems: "center",
+  marginTop: 20,
+},
+button: {
+  backgroundColor:"#59C81E",
+  width: "100%",
+  padding: 15,
+  borderRadius: 24,
+  alignItems: "center",
+  paddingLeft: 32,
+  paddingRight: 32,
+},
+buttonOutline: {
+  backgroundColor:"white",
+  marginTop: 10,
+  borderColor: "#59C81E",
+  borderWidth: 2,
+},
+buttonText: {
+  color: "black",
+  fontWeight: "700",
+  fontSize: 16,
+},
+buttonOutlineText: {
+  color: "black",
+  fontWeight: "700",
+  fontSize: 16,
+},
 })

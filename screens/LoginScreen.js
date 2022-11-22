@@ -1,7 +1,7 @@
-import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native'
+import { Image, KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native'
 import {React, useEffect, useState} from 'react'
 import { auth } from "../firebase"
-import { useNavigation } from '@react-navigation/core'
+import { useNavigation } from "@react-navigation/core"
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("")
@@ -16,18 +16,11 @@ const LoginScreen = () => {
         navigation.navigate("Home")
       }
     })
-
+    
   }, [])
 
-
-  const handleSignUp = () => {
-    auth
-    .createUserWithEmailAndPassword(email, password)
-    .then(userCredentials => {
-      const user = userCredentials.user;
-      console.log("Registered with", user.email);
-    })
-    .catch(error => alert(error.message))
+  const moveToRegisterPage = () => {
+    navigation.navigate("Register")
   }
 
   const handleLogin = () => {
@@ -39,13 +32,14 @@ const LoginScreen = () => {
     })
     .catch(error => alert(error.message))
   }
-  
 
   return (
     <KeyboardAvoidingView
     style={styles.container}
     behavior="padding"
     >
+      <Text style={styles.h1}>RecyclApp</Text>
+      <Image source={require('../assets/recyclapp2.png')} />
     <View style={styles.inputContainer}>
       <TextInput
       placeholder="Email"
@@ -71,10 +65,10 @@ const LoginScreen = () => {
           </TouchableOpacity>
           
           <TouchableOpacity
-          onPress={handleSignUp}
+          onPress={moveToRegisterPage}
           style={[styles.button, styles.buttonOutline]}
         >
-          <Text style={styles.buttonOutlineText}>Register</Text>
+          <Text style={styles.buttonOutlineText}>Register here</Text>
           </TouchableOpacity>
           </View>
     </KeyboardAvoidingView>
@@ -90,34 +84,43 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "#99E4F0",
+    marginTop: -100,
   },
 inputContainer: {
   width:"80%",
+  
 },
+h1: {
+  fontSize: 32,
+},
+
 input: {
   backgroundColor:"white",
   paddingHorizontal: 15,
   paddingVertical:10,
-  borderRadius: 10,
-  marginTop: 5,
+  borderRadius: 24,
+  marginTop: 15,
 }, 
 buttonContainer: {
   width: "60%",
   justifyContent: "center",
   alignItems: "center",
-  marginTop: 40,
+  marginTop: 20,
 },
 button: {
-  backgroundColor:"lightblue",
+  backgroundColor:"#59C81E",
   width: "100%",
   padding: 15,
-  borderRadius: 10,
+  borderRadius: 24,
   alignItems: "center",
+  paddingLeft: 32,
+  paddingRight: 32,
 },
 buttonOutline: {
   backgroundColor:"white",
-  marginTop: 5,
-  borderColor: "lightblue",
+  marginTop: 10,
+  borderColor: "#59C81E",
   borderWidth: 2,
 },
 buttonText: {
