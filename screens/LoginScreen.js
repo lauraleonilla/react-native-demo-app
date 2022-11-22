@@ -5,20 +5,24 @@ import {
   View,
 } from "react-native";
 import { React, useEffect, useState } from "react";
-import { auth } from "../firebase";
 import { useNavigation } from "@react-navigation/core";
+import { useDispatch } from "react-redux";
+import { auth } from "../firebase";
 import ActionButton from "../components/ActionButton";
+import { setUser } from "../slices/userSlice";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
         console.log(user);
+        dispatch(setUser(user));
         navigation.navigate("Home");
       }
     });
@@ -39,6 +43,9 @@ const LoginScreen = () => {
       .signInWithEmailAndPassword(email, password)
       .then((userCredentials) => {
         const user = userCredentials.user;
+        if (user) {
+          navigation.navigate("Home");
+        }
         console.log("Logged in with:", user.email);
       })
       .catch((error) => alert(error.message));
