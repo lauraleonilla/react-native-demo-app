@@ -22,7 +22,7 @@ const LoginScreen = () => {
     auth.onAuthStateChanged((user) => {
       if (user) {
         console.log(user);
-        dispatch(setUser(user));
+        dispatch(setUser({ user }));
         navigation.navigate("Home");
       }
     });

@@ -23,7 +23,7 @@ const HomeScreen = () => {
       <ActionButton onPress={handleSignOut} buttonText="Sign out" />
       <ActionButton
         onPress={() => navigation.navigate("EditUserInfo")}
-        buttonText="Edit user info"
+        buttonText="Account info"
       />
     </View>
   );
