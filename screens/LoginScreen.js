@@ -22,7 +22,6 @@ const LoginScreen = () => {
     auth.onAuthStateChanged((user) => {
       if (user) {
         console.log(user);
-        dispatch(setUser({ user }));
         navigation.navigate("Home");
       }
     });
@@ -44,6 +43,8 @@ const LoginScreen = () => {
       .then((userCredentials) => {
         const user = userCredentials.user;
         if (user) {
+          console.log("LÖL", user);
+          dispatch(setUser(user));
           navigation.navigate("Home");
         }
         console.log("Logged in with:", user.email);
