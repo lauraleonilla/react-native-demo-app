@@ -26,7 +26,14 @@ const LoginScreen = () => {
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
-        console.log(user);
+        dispatch(
+          setUser({
+            displayName: user.displayName,
+            email: user.email,
+            phoneNumber: user.phoneNumber,
+            photoURL: user.photoURL,
+          })
+        );
         navigation.navigate("Home");
       }
     });
@@ -41,7 +48,6 @@ const LoginScreen = () => {
       .createUserWithEmailAndPassword(email, password)
       .then((userCredentials) => {
         const user = userCredentials.user;
-        console.log("Registered with", user.email);
       })
       .catch((error) => alert(error.message));
   };
@@ -52,10 +58,8 @@ const LoginScreen = () => {
       .then((userCredentials) => {
         const user = userCredentials.user;
         if (user) {
-          dispatch(setUser(user));
           navigation.navigate("Home");
         }
-        console.log("Logged in with:", user.email);
       })
       .catch((error) => alert(error.message));
   };

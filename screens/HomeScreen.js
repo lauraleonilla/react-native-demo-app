@@ -23,6 +23,7 @@ const HomeScreen = () => {
   return (
     <View style = {styles.container}>
       <Text>Email: {auth.currentUser?.email}</Text>
+
       <TouchableOpacity
         onPress={handleSignOut}
         style={styles.button}
@@ -36,6 +37,16 @@ const HomeScreen = () => {
         >
         <Text style={styles.buttonText}>Your orders</Text>
           </TouchableOpacity>
+
+      <ActionButton onPress={handleSignOut} buttonText="Sign out" />
+      <ActionButton
+        onPress={() => navigation.navigate("EditUserInfo")}
+        buttonText="Account info"
+      />
+      <ActionButton
+        onPress={() => navigation.navigate("Map")}
+        buttonText="Order pick up"
+      />
     </View>
 
   )
