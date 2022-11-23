@@ -1,10 +1,14 @@
 import React from "react";
 import { View, StyleSheet, TextInput } from "react-native";
 
-const InfoField = ({ fieldText }) => {
+const InfoField = ({ fieldText, onChange, fieldName }) => {
   return (
     <View style={styles.infoField}>
-      <TextInput placeholder={fieldText} placeholderTextColor="#000" />
+      <TextInput
+        placeholder={fieldText}
+        placeholderTextColor="#000"
+        onChangeText={(text) => onChange(fieldName, text)}
+      />
     </View>
   );
 };
@@ -18,7 +22,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: "20%",
-    marginTop: 20,
+    marginBottom: 25,
   },
 });
 

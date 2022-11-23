@@ -10,17 +10,17 @@ const firebaseConfig = {
   projectId: "fir-auth-47b3d",
   storageBucket: "fir-auth-47b3d.appspot.com",
   messagingSenderId: "121823743292",
-  appId: "1:121823743292:web:6e692763f1969816212239"
+  appId: "1:121823743292:web:6e692763f1969816212239",
 };
 
 // Initialize Firebase
 let app;
-if (firebase.apps.length===0) {
-    app= firebase.initializeApp(firebaseConfig);
-}   else {
-    app = firebase.app()
+if (firebase.apps.length === 0) {
+  app = firebase.initializeApp(firebaseConfig);
+} else {
+  app = firebase.app();
 }
 
-const auth=firebase.auth()
+const auth = firebase.auth();
 
 export { auth };
