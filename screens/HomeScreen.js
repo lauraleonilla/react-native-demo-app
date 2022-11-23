@@ -25,6 +25,10 @@ const HomeScreen = () => {
         onPress={() => navigation.navigate("EditUserInfo")}
         buttonText="Account info"
       />
+      <ActionButton
+        onPress={() => navigation.navigate("Map")}
+        buttonText="Order pick up"
+      />
     </View>
   );
 };
