@@ -7,6 +7,7 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  StatusBar
 } from "react-native";
 import { useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/core";
@@ -16,6 +17,8 @@ import { setUser } from "../slices/userSlice";
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const [isPress, setIsPress]=useState(false);
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -58,7 +61,11 @@ const LoginScreen = () => {
   };
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior="padding">
+    <View style={styles.container}>
+      <StatusBar 
+      backgroundColor={"white"}
+      barStyle="dark-content"
+      />
       <Text style={styles.h1}>RecyclApp</Text>
       <Image source={require("../assets/recyclapp2.png")} />
       <View style={styles.inputContainer}>
@@ -88,48 +95,67 @@ const LoginScreen = () => {
           <Text style={styles.buttonOutlineText}>Register here</Text>
         </TouchableOpacity>
       </View>
-    </KeyboardAvoidingView>
+
+    </View>
   );
 };
 
 export default LoginScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#99E4F0",
-    marginTop: -100,
-  },
+    container: {
+      flex: 1,
+      alignItems: "center",
+      backgroundColor: "#99E4F0",
+    },
+    btnNormal: {
+      borderColor: 'blue',
+      borderWidth: 1,
+      borderRadius: 10,
+      height: 30,
+      width: 100,
+    },
+    btnPress: {
+      borderColor: 'blue',
+      borderWidth: 1,
+      height: 30,
+      width: 100,
+    },
+
   inputContainer: {
-    width: "80%",
+    width:"80%",
+    
   },
+  h1: {
+    fontSize: 32,
+  },
+
   input: {
-    backgroundColor: "white",
+    backgroundColor:"white",
     paddingHorizontal: 15,
-    paddingVertical: 10,
-    borderRadius: 10,
-    marginTop: 5,
-  },
+    paddingVertical:10,
+    borderRadius: 24,
+    marginTop: 15,
+  }, 
   buttonContainer: {
     width: "60%",
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center",
-    marginTop: 40,
-    height: 100,
+    marginTop: 20,
   },
   button: {
-    backgroundColor: "lightblue",
+    backgroundColor:"#59C81E",
     width: "100%",
     padding: 15,
-    borderRadius: 10,
+    borderRadius: 24,
     alignItems: "center",
+    paddingLeft: 32,
+    paddingRight: 32,
   },
   buttonOutline: {
-    backgroundColor: "white",
-    marginTop: 5,
-    borderColor: "lightblue",
+    backgroundColor:"white",
+    marginTop: 10,
+    borderColor: "#59C81E",
     borderWidth: 2,
   },
   buttonText: {
@@ -142,4 +168,4 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     fontSize: 16,
   },
-});
+  })

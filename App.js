@@ -8,6 +8,7 @@ import HomeScreen from "./screens/HomeScreen";
 import EditUserInfo from "./screens/EditUserInfo";
 import { store } from "./store";
 import RegisterScreen from "./screens/RegisterScreen";
+import YourOrders from "./screens/YourOrders";
 
 const Stack = createStackNavigator();
 
@@ -33,6 +34,7 @@ const App = () => {
             component={EditUserInfo}
             options={{ headerShown: false }}
           />
+          <Stack.Screen name="YourOrders" component={YourOrders} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
