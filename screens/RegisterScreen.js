@@ -61,7 +61,6 @@ const RegisterScreen = () => {
       </View>
 
       <View style={styles.buttonContainer}>
-        <Text> {auth.currentUser?.email}</Text>
         <TouchableOpacity onPress={handleSignUp} style={styles.button}>
           <Text style={styles.buttonText}>Register</Text>
         </TouchableOpacity>
@@ -85,7 +84,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#99E4F0",
-    marginTop: -100,
+    marginTop: -500,
   },
   inputContainer: {
     width: "80%",
