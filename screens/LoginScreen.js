@@ -27,7 +27,6 @@ const LoginScreen = () => {
           setUser({
             displayName: user.displayName,
             email: user.email,
-            phoneNumber: user.phoneNumber,
             photoURL: user.photoURL,
           })
         );
@@ -38,15 +37,6 @@ const LoginScreen = () => {
 
   const moveToRegisterPage = () => {
     navigation.navigate("Register");
-  };
-
-  const handleSignUp = () => {
-    auth
-      .createUserWithEmailAndPassword(email, password)
-      .then((userCredentials) => {
-        const user = userCredentials.user;
-      })
-      .catch((error) => alert(error.message));
   };
 
   const handleLogin = () => {

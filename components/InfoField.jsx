@@ -5,7 +5,7 @@ const InfoField = ({ fieldText, onChange, fieldName }) => {
   return (
     <View style={styles.infoField}>
       <TextInput
-        placeholder={fieldText}
+        value={fieldText}
         placeholderTextColor="#000"
         onChangeText={(text) => onChange(fieldName, text)}
       />

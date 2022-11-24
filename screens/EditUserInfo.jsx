@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 import { View, Text, StyleSheet, SafeAreaView } from "react-native";
 import { Avatar } from "@rneui/themed";
 import { useSelector, useDispatch } from "react-redux";
 import InfoField from "../components/InfoField";
 import ActionButton from "../components/ActionButton";
 import BackButton from "../components/BackButton";
-import { getUser, setUser } from "../slices/userSlice";
+import { getUser, setUser, clearUser } from "../slices/userSlice";
 import { auth } from "../firebase";
+import { persistor } from "../store";
 
 const EditUserInfo = () => {
+  const navigation = useNavigation();
   const dispatch = useDispatch();
   const userData = useSelector(getUser);
   const [userInfo, setUserInfo] = useState(userData);
@@ -24,8 +27,17 @@ const EditUserInfo = () => {
       auth.currentUser
         .updateEmail(userInfo.email)
         .then(() => {
-          dispatch(setUser({ ...userInfo, email: userInfo.email }));
-          setButtonDisabled(true);
+          // dispatch(clearUser());
+          // persistor.pause();
+          // persistor.flush().then(() => {
+          //   return persistor.purge();
+          // });
+          auth
+            .signOut()
+            .then(() => {
+              navigation.navigate("Login");
+            })
+            .catch((error) => alert(error.message));
         })
         .catch((error) => {
           console.log("Error updating user", error);
@@ -43,6 +55,10 @@ const EditUserInfo = () => {
         .catch((error) => {
           console.log("Error updating user", error);
         });
+    }
+    if (userData.phoneNumber !== userInfo.phoneNumber) {
+      dispatch(setUser({ ...userInfo, phoneNumber: userInfo.phoneNumber }));
+      setButtonDisabled(true);
     }
   };
 
@@ -62,14 +78,14 @@ const EditUserInfo = () => {
           rounded
           source={{
             uri:
-              userData.photoURL ||
+              userData?.photoURL ||
               "https://png.pngtree.com/png-vector/20190114/ourlarge/pngtree-vector-avatar-icon-png-image_313572.jpg",
           }}
         />
         <View style={[styles.infoFieldWrapper, { marginTop: 20 }]}>
           <Text style={styles.fieldDescription}>Name</Text>
           <InfoField
-            fieldText={userData.displayName || "-"}
+            fieldText={userInfo?.displayName || "-"}
             onChange={onInfoFieldChange}
             fieldName="displayName"
           />
@@ -77,7 +93,7 @@ const EditUserInfo = () => {
         <View style={styles.infoFieldWrapper}>
           <Text style={styles.fieldDescription}>Email</Text>
           <InfoField
-            fieldText={userData.email}
+            fieldText={userInfo?.email}
             onChange={onInfoFieldChange}
             fieldName="email"
           />
@@ -85,7 +101,7 @@ const EditUserInfo = () => {
         <View style={styles.infoFieldWrapper}>
           <Text style={styles.fieldDescription}>Phonenumber</Text>
           <InfoField
-            fieldText={userData.phoneNumber || "+358 123 4567"}
+            fieldText={userInfo?.phoneNumber || "-"}
             onChange={onInfoFieldChange}
             fieldName="phoneNumber"
           />

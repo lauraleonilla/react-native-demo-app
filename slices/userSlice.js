@@ -17,11 +17,17 @@ export const userSlice = createSlice({
       state.phoneNumber = action.payload.phoneNumber;
       state.photoURL = action.payload.photoURL;
     },
+    clearUser: (state) => {
+      state.displayName = "";
+      state.email = "";
+      state.phoneNumber = "";
+      state.photoURL = "";
+    },
   },
 });
 
-export const { setUser } = userSlice.actions;
+export const { setUser, clearUser } = userSlice.actions;
 
-export const getUser = (state) => state.user;
+export const getUser = (state) => state;
 
 export default userSlice.reducer;
