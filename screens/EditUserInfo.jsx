@@ -1,25 +1,43 @@
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { View, Text, StyleSheet, SafeAreaView } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  SafeAreaView,
+  KeyboardAvoidingView,
+  Platform,
+} from "react-native";
 import { Avatar } from "@rneui/themed";
 import { useSelector, useDispatch } from "react-redux";
 import InfoField from "../components/InfoField";
 import ActionButton from "../components/ActionButton";
 import BackButton from "../components/BackButton";
-import { getUser, setUser, clearUser } from "../slices/userSlice";
+import {
+  getUser,
+  setUser,
+  setUserPhoneNumber,
+  getUserPhoneNumber,
+} from "../slices/userSlice";
 import { auth } from "../firebase";
-import { persistor } from "../store";
 
 const EditUserInfo = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const userData = useSelector(getUser);
+  const userPhone = useSelector(getUserPhoneNumber);
   const [userInfo, setUserInfo] = useState(userData);
+  const [userPhoneNumber, setUserPhoneNumberInfo] = useState(userPhone);
   const [buttonDisabled, setButtonDisabled] = useState(true);
 
   const onInfoFieldChange = (fieldName, data) => {
-    setUserInfo({ ...userInfo, [fieldName]: data });
-    setButtonDisabled(false);
+    if (fieldName === "phoneNumber") {
+      setUserPhoneNumberInfo(data);
+      setButtonDisabled(false);
+    } else {
+      setUserInfo({ ...userInfo, [fieldName]: data });
+      setButtonDisabled(false);
+    }
   };
 
   const updateUserData = () => {
@@ -27,11 +45,6 @@ const EditUserInfo = () => {
       auth.currentUser
         .updateEmail(userInfo.email)
         .then(() => {
-          // dispatch(clearUser());
-          // persistor.pause();
-          // persistor.flush().then(() => {
-          //   return persistor.purge();
-          // });
           auth
             .signOut()
             .then(() => {
@@ -56,63 +69,68 @@ const EditUserInfo = () => {
           console.log("Error updating user", error);
         });
     }
-    if (userData.phoneNumber !== userInfo.phoneNumber) {
-      dispatch(setUser({ ...userInfo, phoneNumber: userInfo.phoneNumber }));
+    if (userPhone !== userPhoneNumber) {
+      dispatch(setUserPhoneNumber({ phoneNumber: userPhoneNumber }));
       setButtonDisabled(true);
     }
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.headerContainer}>
-        <View style={styles.backButtonContainer}>
-          <BackButton />
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{ flex: 1 }}
+      >
+        <View style={styles.headerContainer}>
+          <View style={styles.backButtonContainer}>
+            <BackButton />
+          </View>
+          <View style={styles.headerTextContainer}>
+            <Text style={styles.headerText}>Account information</Text>
+          </View>
         </View>
-        <View style={styles.headerTextContainer}>
-          <Text style={styles.headerText}>Account information</Text>
-        </View>
-      </View>
-      <View style={styles.infoContainer}>
-        <Avatar
-          size={90}
-          rounded
-          source={{
-            uri:
-              userData?.photoURL ||
-              "https://png.pngtree.com/png-vector/20190114/ourlarge/pngtree-vector-avatar-icon-png-image_313572.jpg",
-          }}
-        />
-        <View style={[styles.infoFieldWrapper, { marginTop: 20 }]}>
-          <Text style={styles.fieldDescription}>Name</Text>
-          <InfoField
-            fieldText={userInfo?.displayName || "-"}
-            onChange={onInfoFieldChange}
-            fieldName="displayName"
+        <View style={styles.infoContainer}>
+          <Avatar
+            size={90}
+            rounded
+            source={{
+              uri:
+                userData?.photoURL ||
+                "https://png.pngtree.com/png-vector/20190114/ourlarge/pngtree-vector-avatar-icon-png-image_313572.jpg",
+            }}
+          />
+          <View style={[styles.infoFieldWrapper, { marginTop: 20 }]}>
+            <Text style={styles.fieldDescription}>Name</Text>
+            <InfoField
+              fieldText={userInfo?.displayName}
+              onChange={onInfoFieldChange}
+              fieldName="displayName"
+            />
+          </View>
+          <View style={styles.infoFieldWrapper}>
+            <Text style={styles.fieldDescription}>Email</Text>
+            <InfoField
+              fieldText={userInfo?.email}
+              onChange={onInfoFieldChange}
+              fieldName="email"
+            />
+          </View>
+          <View style={styles.infoFieldWrapper}>
+            <Text style={styles.fieldDescription}>Phonenumber</Text>
+            <InfoField
+              fieldText={userPhoneNumber}
+              onChange={onInfoFieldChange}
+              fieldName="phoneNumber"
+            />
+          </View>
+          <ActionButton
+            buttonText="Save"
+            style={{ marginTop: 30 }}
+            onPress={() => updateUserData()}
+            disabled={buttonDisabled}
           />
         </View>
-        <View style={styles.infoFieldWrapper}>
-          <Text style={styles.fieldDescription}>Email</Text>
-          <InfoField
-            fieldText={userInfo?.email}
-            onChange={onInfoFieldChange}
-            fieldName="email"
-          />
-        </View>
-        <View style={styles.infoFieldWrapper}>
-          <Text style={styles.fieldDescription}>Phonenumber</Text>
-          <InfoField
-            fieldText={userInfo?.phoneNumber || "-"}
-            onChange={onInfoFieldChange}
-            fieldName="phoneNumber"
-          />
-        </View>
-        <ActionButton
-          buttonText="Save"
-          style={{ marginTop: 30 }}
-          onPress={() => updateUserData()}
-          disabled={buttonDisabled}
-        />
-      </View>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 };
@@ -142,7 +160,7 @@ const styles = StyleSheet.create({
     width: "10%",
   },
   infoContainer: {
-    width: "100%",
+    flex: 1,
     height: "90%",
     alignItems: "center",
     justifyContent: "center",

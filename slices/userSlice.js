@@ -14,8 +14,13 @@ export const userSlice = createSlice({
     setUser: (state, action) => {
       state.displayName = action.payload.displayName;
       state.email = action.payload.email;
-      state.phoneNumber = action.payload.phoneNumber;
       state.photoURL = action.payload.photoURL;
+    },
+    setUserPhoneNumber: (state, action) => {
+      state.phoneNumber = action.payload.phoneNumber;
+    },
+    getUserPhoneNumber: (state, action) => {
+      state.phoneNumber = action.payload.phoneNumber;
     },
     clearUser: (state) => {
       state.displayName = "";
@@ -26,8 +31,16 @@ export const userSlice = createSlice({
   },
 });
 
-export const { setUser, clearUser } = userSlice.actions;
+export const { setUser, setUserPhoneNumber, clearUser } = userSlice.actions;
 
-export const getUser = (state) => state;
+export const getUser = (state) => {
+  return {
+    displayName: state.displayName,
+    email: state.email,
+    photoURL: state.photoURL,
+  };
+};
+
+export const getUserPhoneNumber = (state) => state.phoneNumber;
 
 export default userSlice.reducer;
