@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import {
   View,
@@ -8,16 +8,18 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
-import { Avatar } from "@rneui/themed";
+
 import { useSelector, useDispatch } from "react-redux";
 import InfoField from "../components/InfoField";
 import ActionButton from "../components/ActionButton";
 import BackButton from "../components/BackButton";
+import UploadScreen from "../components/Upload";
 import {
   getUser,
   setUser,
   setUserPhoneNumber,
   getUserPhoneNumber,
+  getImageDownloadUrl,
 } from "../slices/userSlice";
 import { auth } from "../firebase";
 
@@ -26,9 +28,16 @@ const EditUserInfo = () => {
   const dispatch = useDispatch();
   const userData = useSelector(getUser);
   const userPhone = useSelector(getUserPhoneNumber);
+  const imageUrl = useSelector(getImageDownloadUrl);
   const [userInfo, setUserInfo] = useState(userData);
   const [userPhoneNumber, setUserPhoneNumberInfo] = useState(userPhone);
   const [buttonDisabled, setButtonDisabled] = useState(true);
+
+  useEffect(() => {
+    if (imageUrl) {
+      setButtonDisabled(false);
+    }
+  }, [imageUrl]);
 
   const onInfoFieldChange = (fieldName, data) => {
     if (fieldName === "phoneNumber") {
@@ -69,6 +78,19 @@ const EditUserInfo = () => {
           console.log("Error updating user", error);
         });
     }
+    if (imageUrl) {
+      auth.currentUser
+        .updateProfile({
+          photoURL: imageUrl,
+        })
+        .then(() => {
+          dispatch(setUser({ ...userInfo, photoURL: imageUrl }));
+          setButtonDisabled(true);
+        })
+        .catch((error) => {
+          console.log("Error updating user", error);
+        });
+    }
     if (userPhone !== userPhoneNumber) {
       dispatch(setUserPhoneNumber({ phoneNumber: userPhoneNumber }));
       setButtonDisabled(true);
@@ -90,15 +112,7 @@ const EditUserInfo = () => {
           </View>
         </View>
         <View style={styles.infoContainer}>
-          <Avatar
-            size={90}
-            rounded
-            source={{
-              uri:
-                userData?.photoURL ||
-                "https://png.pngtree.com/png-vector/20190114/ourlarge/pngtree-vector-avatar-icon-png-image_313572.jpg",
-            }}
-          />
+          <UploadScreen />
           <View style={[styles.infoFieldWrapper, { marginTop: 20 }]}>
             <Text style={styles.fieldDescription}>Name</Text>
             <InfoField

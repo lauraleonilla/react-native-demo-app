@@ -5,6 +5,7 @@ const initialState = {
   email: "",
   phoneNumber: "",
   photoURL: "",
+  imageDownloadUrl: "",
 };
 
 export const userSlice = createSlice({
@@ -19,8 +20,8 @@ export const userSlice = createSlice({
     setUserPhoneNumber: (state, action) => {
       state.phoneNumber = action.payload.phoneNumber;
     },
-    getUserPhoneNumber: (state, action) => {
-      state.phoneNumber = action.payload.phoneNumber;
+    setImageDownloadUrl: (state, action) => {
+      state.imageDownloadUrl = action.payload.imageDownloadUrl;
     },
     clearUser: (state) => {
       state.displayName = "";
@@ -31,7 +32,8 @@ export const userSlice = createSlice({
   },
 });
 
-export const { setUser, setUserPhoneNumber, clearUser } = userSlice.actions;
+export const { setUser, setUserPhoneNumber, setImageDownloadUrl, clearUser } =
+  userSlice.actions;
 
 export const getUser = (state) => {
   return {
@@ -42,5 +44,6 @@ export const getUser = (state) => {
 };
 
 export const getUserPhoneNumber = (state) => state.phoneNumber;
+export const getImageDownloadUrl = (state) => state.imageDownloadUrl;
 
 export default userSlice.reducer;

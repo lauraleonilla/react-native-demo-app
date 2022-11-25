@@ -27,6 +27,7 @@
     "eslint-plugin-unused-imports": "^2.0.0",
     "eslint-visitor-keys": "^3.3.0",
     "expo": "~47.0.6",
+    "expo-image-picker": "^14.0.2",
     "expo-status-bar": "~1.4.2",
     "firebase": "^8.2.3",
     "prettier": "^2.7.1",
