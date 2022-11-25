@@ -23,16 +23,11 @@ export const userSlice = createSlice({
     setImageDownloadUrl: (state, action) => {
       state.imageDownloadUrl = action.payload.imageDownloadUrl;
     },
-    clearUser: (state) => {
-      state.displayName = "";
-      state.email = "";
-      state.phoneNumber = "";
-      state.photoURL = "";
-    },
+    resetUser: () => initialState,
   },
 });
 
-export const { setUser, setUserPhoneNumber, setImageDownloadUrl, clearUser } =
+export const { setUser, setUserPhoneNumber, setImageDownloadUrl, resetUser } =
   userSlice.actions;
 
 export const getUser = (state) => {

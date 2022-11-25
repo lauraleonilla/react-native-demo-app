@@ -2,15 +2,19 @@ import { useNavigation } from "@react-navigation/native";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import { auth } from "../firebase";
+import { useDispatch } from "react-redux";
 import ActionButton from "../components/ActionButton";
+import { resetUser } from "../slices/userSlice";
 
 const HomeScreen = () => {
+  const dispatch = useDispatch();
   const navigation = useNavigation();
 
   const handleSignOut = () => {
     auth
       .signOut()
       .then(() => {
+        dispatch(resetUser());
         navigation.replace("Login");
       })
 
