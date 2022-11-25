@@ -8,12 +8,12 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
-
 import { useSelector, useDispatch } from "react-redux";
 import InfoField from "../components/InfoField";
 import ActionButton from "../components/ActionButton";
 import BackButton from "../components/BackButton";
-import UploadScreen from "../components/Upload";
+import ProfileImage from "../components/ProfileImage";
+import UserDetailWrapper from "../components/UserDetailWrapper";
 import {
   getUser,
   setUser,
@@ -112,31 +112,28 @@ const EditUserInfo = () => {
           </View>
         </View>
         <View style={styles.infoContainer}>
-          <UploadScreen />
-          <View style={[styles.infoFieldWrapper, { marginTop: 20 }]}>
-            <Text style={styles.fieldDescription}>Name</Text>
+          <ProfileImage />
+          <UserDetailWrapper headerText="Name">
             <InfoField
               fieldText={userInfo?.displayName}
               onChange={onInfoFieldChange}
               fieldName="displayName"
             />
-          </View>
-          <View style={styles.infoFieldWrapper}>
-            <Text style={styles.fieldDescription}>Email</Text>
+          </UserDetailWrapper>
+          <UserDetailWrapper headerText="Email">
             <InfoField
               fieldText={userInfo?.email}
               onChange={onInfoFieldChange}
               fieldName="email"
             />
-          </View>
-          <View style={styles.infoFieldWrapper}>
-            <Text style={styles.fieldDescription}>Phonenumber</Text>
+          </UserDetailWrapper>
+          <UserDetailWrapper headerText="Phonenumber">
             <InfoField
               fieldText={userPhoneNumber}
               onChange={onInfoFieldChange}
               fieldName="phoneNumber"
             />
-          </View>
+          </UserDetailWrapper>
           <ActionButton
             buttonText="Save"
             style={{ marginTop: 30 }}
@@ -176,19 +173,6 @@ const styles = StyleSheet.create({
   infoContainer: {
     flex: 1,
     height: "90%",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  infoFieldWrapper: {
-    width: "100%",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  fieldDescription: {
-    fontSize: 15,
-    fontWeight: "500",
-    marginBottom: 5,
   },
 });
 

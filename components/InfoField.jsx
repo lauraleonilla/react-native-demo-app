@@ -19,15 +19,16 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
     textAlign: "center",
+    fontSize: 15,
   },
   infoField: {
     width: "100%",
     backgroundColor: "hsla(133, 95%, 37%, 0.5)",
-    height: 60,
+    height: 45,
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: "20%",
-    marginBottom: 25,
+    borderRadius: "50%",
+    marginBottom: 20,
   },
 });
 

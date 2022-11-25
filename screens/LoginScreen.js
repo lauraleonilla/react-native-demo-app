@@ -26,7 +26,6 @@ const LoginScreen = () => {
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
-        console.log("HERE IS USEEEr", user);
         dispatch(
           setUser({
             displayName: user.displayName,

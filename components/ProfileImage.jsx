@@ -1,18 +1,12 @@
 import React, { useState, useEffect } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  SafeAreaView,
-} from "react-native";
+import { StyleSheet, TouchableOpacity, SafeAreaView } from "react-native";
 import { Avatar } from "@rneui/themed";
 import { useDispatch, useSelector } from "react-redux";
 import * as ImagePicker from "expo-image-picker";
 import { firebase } from "../firebase";
 import { setImageDownloadUrl, getUser } from "../slices/userSlice";
 
-const UploadScreen = () => {
+const ProfileImage = () => {
   const [image, setImage] = useState(null);
   const userData = useSelector(getUser);
   const [uploading, setUploading] = useState(false);
@@ -55,11 +49,11 @@ const UploadScreen = () => {
   };
 
   const getImageSource = () => {
-    if (userData?.photoURL) {
-      return userData.photoURL;
-    }
     if (image && image.uri) {
       return image.uri;
+    }
+    if (userData?.photoURL) {
+      return userData.photoURL;
     }
     return "https://png.pngtree.com/png-vector/20190114/ourlarge/pngtree-vector-avatar-icon-png-image_313572.jpg";
   };
@@ -67,45 +61,19 @@ const UploadScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <TouchableOpacity onPress={pickImage}>
-        <Avatar size={100} rounded source={{ uri: getImageSource() }} />
+        <Avatar size={150} rounded source={{ uri: getImageSource() }} />
       </TouchableOpacity>
     </SafeAreaView>
   );
 };
 
-export default UploadScreen;
+export default ProfileImage;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: "center",
     justifyContent: "center",
-  },
-  selectButton: {
-    borderRadius: 5,
-    width: 150,
-    height: 50,
-    backgroundColor: "blue",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  uploadButton: {
-    borderRadius: 5,
-    width: 150,
-    height: 50,
-    backgroundColor: "red",
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 20,
-  },
-  buttonText: {
-    color: "white",
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  imageContainer: {
-    marginTop: 30,
-    marginBottom: 50,
-    alignItems: "center",
+    marginBottom: 30,
+    marginTop: 50,
   },
 });
