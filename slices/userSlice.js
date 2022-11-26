@@ -31,14 +31,15 @@ export const { setUser, setUserPhoneNumber, setImageDownloadUrl, resetUser } =
   userSlice.actions;
 
 export const getUser = (state) => {
+  const { user } = state;
   return {
-    displayName: state.displayName,
-    email: state.email,
-    photoURL: state.photoURL,
+    displayName: user.displayName,
+    email: user.email,
+    photoURL: user.photoURL,
   };
 };
 
-export const getUserPhoneNumber = (state) => state.phoneNumber;
-export const getImageDownloadUrl = (state) => state.imageDownloadUrl;
+export const getUserPhoneNumber = (state) => state.user.phoneNumber;
+export const getImageDownloadUrl = (state) => state.user.imageDownloadUrl;
 
 export default userSlice.reducer;
