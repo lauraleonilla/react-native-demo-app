@@ -18,7 +18,7 @@ const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [isPress, setIsPress]=useState(false);
+  const [isPress, setIsPress] = useState(false);
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -66,9 +66,9 @@ const LoginScreen = () => {
 
   return (
     <View style={styles.container}>
-      <StatusBar 
-      backgroundColor={"white"}
-      barStyle="dark-content"
+      <StatusBar
+        backgroundColor={"white"}
+        barStyle="dark-content"
       />
       <Text style={styles.h1}>RecyclApp</Text>
       <Image source={require("../assets/recyclapp2.png")} />
@@ -107,40 +107,42 @@ const LoginScreen = () => {
 export default LoginScreen;
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      alignItems: "center",
-      backgroundColor: "#99E4F0",
-    },
-    btnNormal: {
-      borderColor: 'blue',
-      borderWidth: 1,
-      borderRadius: 10,
-      height: 30,
-      width: 100,
-    },
-    btnPress: {
-      borderColor: 'blue',
-      borderWidth: 1,
-      height: 30,
-      width: 100,
-    },
+  container: {
+    flex: 1,
+    alignItems: "center",
+    backgroundcolor: "#8DFAA5",
+    backgroundimage: linear - gradient("#8DFAA5", "#99E4F0"),
+    marginTop: -100,
+  },
+  btnNormal: {
+    borderColor: 'blue',
+    borderWidth: 1,
+    borderRadius: 10,
+    height: 30,
+    width: 100,
+  },
+  btnPress: {
+    borderColor: 'blue',
+    borderWidth: 1,
+    height: 30,
+    width: 100,
+  },
 
   inputContainer: {
-    width:"80%",
-    
+    width: "80%",
+
   },
   h1: {
     fontSize: 32,
   },
 
   input: {
-    backgroundColor:"white",
+    backgroundColor: "white",
     paddingHorizontal: 15,
-    paddingVertical:10,
+    paddingVertical: 10,
     borderRadius: 24,
     marginTop: 15,
-  }, 
+  },
   buttonContainer: {
     width: "60%",
     justifyContent: "center",
@@ -148,7 +150,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   button: {
-    backgroundColor:"#59C81E",
+    backgroundColor: "#59C81E",
     width: "100%",
     padding: 15,
     borderRadius: 24,
@@ -157,7 +159,7 @@ const styles = StyleSheet.create({
     paddingRight: 32,
   },
   buttonOutline: {
-    backgroundColor:"white",
+    backgroundColor: "white",
     marginTop: 10,
     borderColor: "#59C81E",
     borderWidth: 2,
@@ -172,4 +174,4 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     fontSize: 16,
   },
-  })
+})
