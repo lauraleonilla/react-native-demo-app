@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#058F1B",
-    borderRadius: "20%",
+    borderRadius: 12,
     marginTop: "5%",
   },
   disabledContainer: {
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#d6d6d6",
-    borderRadius: "20%",
+    borderRadius: 12,
     marginTop: "5%",
   },
   buttonText: {

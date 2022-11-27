@@ -9,6 +9,7 @@ import EditUserInfo from "./screens/EditUserInfo";
 import { store } from "./store";
 import RegisterScreen from "./screens/RegisterScreen";
 import YourOrders from "./screens/YourOrders";
+import OrderStatus from "./screens/OrderStatus";
 
 const Stack = createStackNavigator();
 
@@ -24,6 +25,7 @@ const App = () => {
           />
           <Stack.Screen name="Register" component={RegisterScreen} />
           <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="OrderStatus" component={OrderStatus} />
           <Stack.Screen
             name="Map"
             component={MapScreen}
