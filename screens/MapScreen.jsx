@@ -42,7 +42,12 @@ const MapScreen = () => {
 
   return (
     <SafeAreaView
-      style={{ flex: 1, backgroundColor: "#99E4F0", marginBottom: "-10%" }}
+      style={{
+        flex: 1,
+        backgroundColor: "#99E4F0",
+        marginBottom: "-10%",
+        paddingTop: 50,
+      }}
     >
       <View style={styles.originContainer}>
         <BackButton />

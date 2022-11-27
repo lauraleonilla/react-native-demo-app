@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  origin: null,
-  destination: null,
+  origin: { location: { lat: 0, lng: 0 } },
+  destination: { location: { lat: 0, lng: 0 } },
 };
 
 export const navslice = createSlice({
