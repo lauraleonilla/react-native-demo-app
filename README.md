@@ -6,5 +6,7 @@ To run the app locally in the terminal run:
 
 
 ```npm i```
+
+
 ```expo start```
 
