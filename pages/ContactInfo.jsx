@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
-import { StyleSheet, Text, View, TextInput } from "react-native";
+import { StyleSheet, Text, View, TextInput, Alert } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import ActionButton from "../components/ActionButton";
 
@@ -8,17 +8,12 @@ const ContactInfo = () => {
   const navigation = useNavigation();
 
   const sendMessage = () => {
-    var link =
-      "mailto:recycl@example.com" +
-      "?cc=myCCaddress@example.com" +
-      "&subject=" +
-      encodeURIComponent("This is my subject") +
-      "&body=" +
-      encodeURIComponent(document.getElementById("myText").value);
-
-    window.location.href = link;
-  };
-
+    Alert.alert(
+      "",
+      "Your message has been sent",
+ 
+    );
+    }
   return (
     <LinearGradient colors={["#8DFAA5", "#99E4F0"]} style={styles.container}>
       <Text style={styles.contactInfoText}>Sign in with Facebook</Text>
