@@ -1,6 +1,7 @@
 import {
   Image,
   KeyboardAvoidingView,
+  StatusBar,
   StyleSheet,
   Text,
   View,
@@ -41,7 +42,8 @@ const RegisterScreen = () => {
   };
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior="padding">
+    <View style={styles.container}>
+            <StatusBar backgroundColor={"white"} barStyle="dark-content" />
       <Text style={styles.h1}>RecyclApp</Text>
       <Image source={require("../assets/recyclapp1.png")} />
       <View style={styles.inputContainer}>
@@ -72,7 +74,7 @@ const RegisterScreen = () => {
           <Text style={styles.buttonText}>Go Back</Text>
         </TouchableOpacity>
       </View>
-    </KeyboardAvoidingView>
+      </View>
   );
 };
 
@@ -84,7 +86,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#99E4F0",
-    marginTop: -500,
+    marginTop: -50
   },
   inputContainer: {
     width: "80%",
