@@ -15,6 +15,7 @@ const Map = () => {
     if (!origin || !destination) {
       return;
     }
+    console.log("HERE IS ORIGIIN", origin);
     mapRef.current.fitToSuppliedMarkers(["origin", "destiation"], {
       edgePadding: { top: 50, right: 50, bottom: 50, left: 50 },
     });
@@ -38,7 +39,6 @@ const Map = () => {
       )
         .then((res) => res.json())
         .then((data) => {
-          console.log("ÄYYY", data);
           // dispatch(setTravelTimeInformation(data.rows[0].elements[0]));
         });
     };

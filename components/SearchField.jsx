@@ -11,7 +11,7 @@ const SearchField = ({ setLocation, placeholder }) => {
       debounce={400}
       placeholder={placeholder}
       styles={{
-        container: { flex: 1, marginLeft: 5, marginRight: 5 },
+        container: { marginLeft: 5, marginRight: 5 },
         textInput: { fontSize: 18 },
       }}
       minLength={2}
