@@ -40,7 +40,7 @@ const HomeScreen = () => {
         <Text style={styles.h1}>RecyclApp</Text>
       </View>
       <Text>Email: {auth.currentUser?.email}</Text>
-      <View style={styles.content}>
+      <View style={[styles.content, styles.elevation]}>
         <ActionButton
           onPress={() => navigation.navigate("Map")}
           buttonText="Order pick up"
@@ -107,6 +107,12 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 24,
     marginTop: 15,
+  },
+  elevation: {
+    shadowColor: "black",
+    shadowOffset: {width: 15, height: 5},
+    elevation: 5,
+    shadowOpacity:.1,
   },
   buttonContainer: {
     width: "100%",
