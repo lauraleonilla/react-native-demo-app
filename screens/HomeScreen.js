@@ -41,23 +41,21 @@ const HomeScreen = () => {
       </View>
       <Text>Email: {auth.currentUser?.email}</Text>
       <View style={styles.content}>
-      <ActionButton
+        <ActionButton
           onPress={() => navigation.navigate("Map")}
           buttonText="Order pick up"
         />
-      <ActionButton
-          onPress={navigationToOrders}
-          buttonText="Your orders"
-        />
+        <ActionButton onPress={navigationToOrders} buttonText="Your orders" />
 
         <ActionButton
           onPress={() => navigation.navigate("EditUserInfo")}
           buttonText="Account info"
         />
-      <ActionButton
-          onPress={handleSignOut}
-          buttonText="Sign out"
+        <ActionButton
+          onPress={() => navigation.navigate("ContactInfo")}
+          buttonText="Contact info"
         />
+        <ActionButton onPress={handleSignOut} buttonText="Sign out" />
       </View>
     </View>
   );

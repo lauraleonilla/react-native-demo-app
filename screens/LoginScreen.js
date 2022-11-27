@@ -56,10 +56,7 @@ const LoginScreen = () => {
 
   return (
     <View style={styles.container}>
-      <StatusBar
-        backgroundColor={"white"}
-        barStyle="dark-content"
-      />
+      <StatusBar backgroundColor={"white"} barStyle="dark-content" />
       <Text style={styles.h1}>RecyclApp</Text>
       <Image source={require("../assets/recyclapp2.png")} />
       <View style={styles.inputContainer}>
@@ -89,7 +86,7 @@ const LoginScreen = () => {
           <Text style={styles.buttonOutlineText}>Register here</Text>
         </TouchableOpacity>
       </View>
-    </View >
+    </View>
   );
 };
 
@@ -100,11 +97,11 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     backgroundcolor: "#8DFAA5",
-    backgroundimage: linear - gradient("#8DFAA5", "#99E4F0"),
+    // backgroundimage: linear - gradient("#8DFAA5", "#99E4F0"),
     marginTop: -100,
   },
   btnNormal: {
-    borderColor: 'blue',
+    borderColor: "blue",
     borderWidth: 1,
     borderRadius: 10,
     height: 30,
@@ -162,4 +159,4 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     fontSize: 16,
   },
-})
+});

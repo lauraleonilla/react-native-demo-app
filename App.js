@@ -11,6 +11,7 @@ import { store, persistor } from "./store";
 import RegisterScreen from "./screens/RegisterScreen";
 import YourOrders from "./screens/YourOrders";
 import OrderStatus from "./screens/OrderStatus";
+import ContactInfo from "./pages/ContactInfo";
 
 const Stack = createStackNavigator();
 
@@ -39,6 +40,7 @@ const App = () => {
               options={{ headerShown: false }}
             />
             <Stack.Screen name="YourOrders" component={YourOrders} />
+            <Stack.Screen name="ContactInfo" component={ContactInfo} />
           </Stack.Navigator>
         </NavigationContainer>
       </PersistGate>
