@@ -10,5 +10,5 @@ To run the app locally in the terminal run:
 
 ```expo start```
 
-In the terminal press ``ì```or ```a``` for starting the application in iOs or Android simulator.
+In the terminal press ```i```or ```a``` for starting the application in iOs or Android simulator.
 
