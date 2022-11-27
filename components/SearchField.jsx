@@ -2,23 +2,25 @@ import React from "react";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { GOOGLE_MAPS_KEY } from "@env";
 import { useDispatch } from "react-redux";
-import { setOrigin } from "../slices/navSlice";
 
-const SearchField = () => {
+const SearchField = ({ setLocation, placeholder }) => {
   const dispatch = useDispatch();
   return (
     <GooglePlacesAutocomplete
       nearbyPlacesAPI="GooglePlacesSearch"
       debounce={400}
-      placeholder="Choose your address?"
-      styles={{ container: { flex: 0 }, textInput: { fontSize: 18 } }}
+      placeholder={placeholder}
+      styles={{
+        container: { flex: 1, marginLeft: 5, marginRight: 5 },
+        textInput: { fontSize: 18 },
+      }}
       minLength={2}
       onFail={(error) => console.log("Error fetching locations", error)}
       query={{ key: GOOGLE_MAPS_KEY, language: "en" }}
       enablePoweredByContainer={false}
       onPress={(data, details = null) => {
         dispatch(
-          setOrigin({
+          setLocation({
             location: details.geometry.location,
             description: data.description,
           })
