@@ -1,17 +1,24 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { StyleSheet, Alert } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
+import ActionButton from "./ActionButton";
 
 const DeliveryInfo = () => {
   return (
-    <View style={styles.container}>
-      <Text>MyComponent</Text>
-    </View>
+    <LinearGradient colors={["#8DFAA5", "#99E4F0"]} style={styles.container}>
+      <ActionButton
+        buttonText="Place order"
+        onPress={() =>
+          Alert.alert("Oerder placed! See My oerders page for updates.")
+        }
+      />
+    </LinearGradient>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    height: "50%",
+    height: "30%",
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#99E4F0",
