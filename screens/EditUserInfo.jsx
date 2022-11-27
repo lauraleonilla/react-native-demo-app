@@ -1,22 +1,52 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, SafeAreaView } from "react-native";
-import { Avatar } from "@rneui/themed";
+import React, { useEffect, useState } from "react";
+import { useNavigation } from "@react-navigation/native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  SafeAreaView,
+  KeyboardAvoidingView,
+  Platform,
+} from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import InfoField from "../components/InfoField";
 import ActionButton from "../components/ActionButton";
 import BackButton from "../components/BackButton";
-import { getUser, setUser } from "../slices/userSlice";
+import ProfileImage from "../components/ProfileImage";
+import UserDetailWrapper from "../components/UserDetailWrapper";
+import {
+  getUser,
+  setUser,
+  setUserPhoneNumber,
+  getUserPhoneNumber,
+  getImageDownloadUrl,
+} from "../slices/userSlice";
 import { auth } from "../firebase";
 
 const EditUserInfo = () => {
+  const navigation = useNavigation();
   const dispatch = useDispatch();
   const userData = useSelector(getUser);
+  const userPhone = useSelector(getUserPhoneNumber);
+  const imageUrl = useSelector(getImageDownloadUrl);
   const [userInfo, setUserInfo] = useState(userData);
+  const [userPhoneNumber, setUserPhoneNumberInfo] = useState(userPhone);
   const [buttonDisabled, setButtonDisabled] = useState(true);
 
+  useEffect(() => {
+    if (imageUrl) {
+      setButtonDisabled(false);
+    }
+  }, [imageUrl]);
+
   const onInfoFieldChange = (fieldName, data) => {
-    setUserInfo({ ...userInfo, [fieldName]: data });
-    setButtonDisabled(false);
+    if (fieldName === "phoneNumber") {
+      setUserPhoneNumberInfo(data);
+      setButtonDisabled(false);
+    } else {
+      setUserInfo({ ...userInfo, [fieldName]: data });
+      setButtonDisabled(false);
+    }
   };
 
   const updateUserData = () => {
@@ -24,8 +54,12 @@ const EditUserInfo = () => {
       auth.currentUser
         .updateEmail(userInfo.email)
         .then(() => {
-          dispatch(setUser({ ...userInfo, email: userInfo.email }));
-          setButtonDisabled(true);
+          auth
+            .signOut()
+            .then(() => {
+              navigation.navigate("Login");
+            })
+            .catch((error) => alert(error.message));
         })
         .catch((error) => {
           console.log("Error updating user", error);
@@ -44,59 +78,70 @@ const EditUserInfo = () => {
           console.log("Error updating user", error);
         });
     }
+    if (imageUrl) {
+      auth.currentUser
+        .updateProfile({
+          photoURL: imageUrl,
+        })
+        .then(() => {
+          dispatch(setUser({ ...userInfo, photoURL: imageUrl }));
+          setButtonDisabled(true);
+        })
+        .catch((error) => {
+          console.log("Error updating user", error);
+        });
+    }
+    if (userPhone !== userPhoneNumber) {
+      dispatch(setUserPhoneNumber({ phoneNumber: userPhoneNumber }));
+      setButtonDisabled(true);
+    }
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.headerContainer}>
-        <View style={styles.backButtonContainer}>
-          <BackButton />
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{ flex: 1 }}
+      >
+        <View style={styles.headerContainer}>
+          <View style={styles.backButtonContainer}>
+            <BackButton />
+          </View>
+          <View style={styles.headerTextContainer}>
+            <Text style={styles.headerText}>Account information</Text>
+          </View>
         </View>
-        <View style={styles.headerTextContainer}>
-          <Text style={styles.headerText}>Account information</Text>
-        </View>
-      </View>
-      <View style={styles.infoContainer}>
-        <Avatar
-          size={90}
-          rounded
-          source={{
-            uri:
-              userData.photoURL ||
-              "https://png.pngtree.com/png-vector/20190114/ourlarge/pngtree-vector-avatar-icon-png-image_313572.jpg",
-          }}
-        />
-        <View style={[styles.infoFieldWrapper, { marginTop: 20 }]}>
-          <Text style={styles.fieldDescription}>Name</Text>
-          <InfoField
-            fieldText={userData.displayName || "-"}
-            onChange={onInfoFieldChange}
-            fieldName="displayName"
+        <View style={styles.infoContainer}>
+          <ProfileImage />
+          <UserDetailWrapper headerText="Name">
+            <InfoField
+              fieldText={userInfo?.displayName}
+              onChange={onInfoFieldChange}
+              fieldName="displayName"
+            />
+          </UserDetailWrapper>
+          <UserDetailWrapper headerText="Email">
+            <InfoField
+              fieldText={userInfo?.email}
+              onChange={onInfoFieldChange}
+              fieldName="email"
+            />
+          </UserDetailWrapper>
+          <UserDetailWrapper headerText="Phonenumber">
+            <InfoField
+              fieldText={userPhoneNumber}
+              onChange={onInfoFieldChange}
+              fieldName="phoneNumber"
+            />
+          </UserDetailWrapper>
+          <ActionButton
+            buttonText="Save"
+            style={{ marginTop: 30 }}
+            onPress={() => updateUserData()}
+            disabled={buttonDisabled}
           />
         </View>
-        <View style={styles.infoFieldWrapper}>
-          <Text style={styles.fieldDescription}>Email</Text>
-          <InfoField
-            fieldText={userData.email}
-            onChange={onInfoFieldChange}
-            fieldName="email"
-          />
-        </View>
-        <View style={styles.infoFieldWrapper}>
-          <Text style={styles.fieldDescription}>Phonenumber</Text>
-          <InfoField
-            fieldText={userData.phoneNumber || "+358 123 4567"}
-            onChange={onInfoFieldChange}
-            fieldName="phoneNumber"
-          />
-        </View>
-        <ActionButton
-          buttonText="Save"
-          style={{ marginTop: 30 }}
-          onPress={() => updateUserData()}
-          disabled={buttonDisabled}
-        />
-      </View>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 };
@@ -126,21 +171,8 @@ const styles = StyleSheet.create({
     width: "10%",
   },
   infoContainer: {
-    width: "100%",
+    flex: 1,
     height: "90%",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  infoFieldWrapper: {
-    width: "100%",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  fieldDescription: {
-    fontSize: 15,
-    fontWeight: "500",
-    marginBottom: 5,
   },
 });
 

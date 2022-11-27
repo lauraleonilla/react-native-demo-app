@@ -5,7 +5,8 @@ const InfoField = ({ fieldText, onChange, fieldName }) => {
   return (
     <View style={styles.infoField}>
       <TextInput
-        placeholder={fieldText}
+        style={styles.input}
+        value={fieldText || ""}
         placeholderTextColor="#000"
         onChangeText={(text) => onChange(fieldName, text)}
       />
@@ -14,15 +15,20 @@ const InfoField = ({ fieldText, onChange, fieldName }) => {
 };
 
 const styles = StyleSheet.create({
-  infoField: {
-    backgroundColor: "hsla(133, 95%, 37%, 0.5)",
+  input: {
+    flex: 1,
     width: "100%",
-    paddingVertical: 12,
-    paddingHorizontal: 32,
+    textAlign: "center",
+    fontSize: 15,
+  },
+  infoField: {
+    width: "100%",
+    backgroundColor: "hsla(133, 95%, 37%, 0.5)",
+    height: 45,
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: "20%",
-    marginBottom: 25,
+    borderRadius: "50%",
+    marginBottom: 20,
   },
 });
 
