@@ -41,21 +41,22 @@ const HomeScreen = () => {
       </View>
       <Text>Email: {auth.currentUser?.email}</Text>
       <View style={styles.content}>
-        <TouchableOpacity onPress={handleSignOut} style={styles.button}>
-          <Text style={styles.buttonText}>Sign out</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={navigationToOrders} style={styles.button}>
-          <Text style={styles.buttonText}>Your orders</Text>
-        </TouchableOpacity>
+      <ActionButton
+          onPress={() => navigation.navigate("Map")}
+          buttonText="Order pick up"
+        />
+      <ActionButton
+          onPress={navigationToOrders}
+          buttonText="Your orders"
+        />
 
         <ActionButton
           onPress={() => navigation.navigate("EditUserInfo")}
           buttonText="Account info"
         />
-        <ActionButton
-          onPress={() => navigation.navigate("Map")}
-          buttonText="Order pick up"
+      <ActionButton
+          onPress={handleSignOut}
+          buttonText="Sign out"
         />
       </View>
     </View>
