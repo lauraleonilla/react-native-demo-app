@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
   searchButton: {
     borderColor: "#59C81E",
     borderWidth: 2,
-    borderRadius: "20%",
+    borderRadius: 20,
     alignItems: "center",
     justifyContent: "center",
     padding: 10,
