@@ -7,7 +7,7 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-  StatusBar
+  StatusBar,
 } from "react-native";
 import { useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/core";
@@ -30,7 +30,6 @@ const LoginScreen = () => {
           setUser({
             displayName: user.displayName,
             email: user.email,
-            phoneNumber: user.phoneNumber,
             photoURL: user.photoURL,
           })
         );
@@ -41,15 +40,6 @@ const LoginScreen = () => {
 
   const moveToRegisterPage = () => {
     navigation.navigate("Register");
-  };
-
-  const handleSignUp = () => {
-    auth
-      .createUserWithEmailAndPassword(email, password)
-      .then((userCredentials) => {
-        const user = userCredentials.user;
-      })
-      .catch((error) => alert(error.message));
   };
 
   const handleLogin = () => {
@@ -99,8 +89,7 @@ const LoginScreen = () => {
           <Text style={styles.buttonOutlineText}>Register here</Text>
         </TouchableOpacity>
       </View>
-
-    </View>
+    </View >
   );
 };
 
@@ -122,7 +111,7 @@ const styles = StyleSheet.create({
     width: 100,
   },
   btnPress: {
-    borderColor: 'blue',
+    borderColor: "blue",
     borderWidth: 1,
     height: 30,
     width: 100,
@@ -130,7 +119,6 @@ const styles = StyleSheet.create({
 
   inputContainer: {
     width: "80%",
-
   },
   h1: {
     fontSize: 32,

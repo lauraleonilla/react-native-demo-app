@@ -19,14 +19,16 @@ const ActionButton = ({ buttonText, onPress, icon: Icon, style, disabled }) => {
 // define your styles
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: "#59C81E",
     width: "100%",
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    justifyContent: "center",
+    padding: 16,
+    borderRadius: 24,
     alignItems: "center",
-    backgroundColor: "#058F1B",
-    borderRadius: "20%",
-    marginTop: "5%",
+    paddingLeft: 32,
+    paddingRight: 32,
+    margin: 8,
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   disabledContainer: {
     width: "100%",
@@ -35,11 +37,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#d6d6d6",
-    borderRadius: "20%",
+    borderRadius: 12,
     marginTop: "5%",
   },
   buttonText: {
-    color: "white",
+    color: "black",
     fontSize: 20,
   },
   disabledButtonText: {
