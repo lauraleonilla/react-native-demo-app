@@ -58,7 +58,7 @@ const LoginScreen = () => {
     <View style={styles.container}>
       <StatusBar backgroundColor={"white"} barStyle="dark-content" />
       <Text style={styles.h1}>RecyclApp</Text>
-      <Image source={require("../assets/recyclapp2.png")} />
+      <Image source={require("../assets/recyclapp2.png")} style={styles.image}/>
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Email"
@@ -98,7 +98,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundcolor: "#8DFAA5",
     // backgroundimage: linear - gradient("#8DFAA5", "#99E4F0"),
-    marginTop: -100,
   },
   btnNormal: {
     borderColor: "blue",
@@ -159,4 +158,7 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     fontSize: 16,
   },
+  image: {
+    marginBottom: -15,
+  }
 });

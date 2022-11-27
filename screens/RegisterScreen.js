@@ -45,7 +45,7 @@ const RegisterScreen = () => {
     <View style={styles.container}>
             <StatusBar backgroundColor={"white"} barStyle="dark-content" />
       <Text style={styles.h1}>RecyclApp</Text>
-      <Image source={require("../assets/recyclapp1.png")} />
+      <Image source={require("../assets/recyclapp1.png")} style={styles.image}/>
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Email"
@@ -133,4 +133,7 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     fontSize: 16,
   },
+  image: {
+    marginBottom: -20,
+  }
 });
