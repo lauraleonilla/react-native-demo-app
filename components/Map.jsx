@@ -33,7 +33,6 @@ const Map = () => {
       longitude: destination.location.lng,
     });
   }, [origin, destination]);
-  console.log("LÖÖÖL", directionsOrigin, directionsDestination);
 
   useEffect(() => {
     if (!origin || !destination) {

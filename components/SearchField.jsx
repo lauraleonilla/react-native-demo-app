@@ -3,7 +3,7 @@ import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplet
 import { GOOGLE_MAPS_KEY } from "@env";
 import { useDispatch } from "react-redux";
 
-const SearchField = ({ setLocation, placeholder }) => {
+const SearchField = ({ setOrigin, setDestination, placeholder }) => {
   const dispatch = useDispatch();
   return (
     <GooglePlacesAutocomplete
@@ -20,12 +20,16 @@ const SearchField = ({ setLocation, placeholder }) => {
       enablePoweredByContainer={false}
       onPress={(data, details = null) => {
         dispatch(
-          setLocation({
-            location: details.geometry.location,
-            description: data.description,
-          })
+          setOrigin
+            ? setOrigin({
+                location: details.geometry.location,
+                description: data.description,
+              })
+            : setDestination({
+                location: details.geometry.location,
+                description: data.description,
+              })
         );
-        // dispatch(setDestination(null));
       }}
       fetchDetails
       returnKeyType="search"

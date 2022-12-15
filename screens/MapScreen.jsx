@@ -16,7 +16,7 @@ import {
 import DeliveryInfo from "../components/DeliveryInfoModal";
 
 const MapScreen = () => {
-  const [fronLocationPlaceholder, setFromLocationPlaceholder] =
+  const [fromLocationPlaceholder, setFromLocationPlaceholder] =
     useState("Where from?");
 
   const origin = useSelector(selectOrigin);
@@ -52,15 +52,15 @@ const MapScreen = () => {
       <View style={styles.originContainer}>
         <BackButton />
         <SearchField
-          setLocation={setOrigin}
-          placeholder={fronLocationPlaceholder}
+          setOrigin={setOrigin}
+          placeholder={fromLocationPlaceholder}
         />
         <TouchableOpacity onPress={() => getUserLocation()}>
           <Ionicons name="navigate" size={30} />
         </TouchableOpacity>
       </View>
       <View style={styles.destinationContainer}>
-        <SearchField setLocation={setDestination} placeholder="Where to?" />
+        <SearchField setDestination={setDestination} placeholder="Where to?" />
       </View>
       <View style={{ flex: 1 }}>
         <Map />

@@ -9,7 +9,7 @@ const DeliveryInfo = () => {
       <ActionButton
         buttonText="Place order"
         onPress={() =>
-          Alert.alert("Oerder placed! See My oerders page for updates.")
+          Alert.alert("Order placed! See My orders page for updates.")
         }
       />
     </LinearGradient>
