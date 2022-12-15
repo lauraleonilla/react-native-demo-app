@@ -56,9 +56,12 @@ const LoginScreen = () => {
 
   return (
     <View style={styles.container}>
-      <StatusBar backgroundColor={"white"} barStyle="dark-content" />
+      <StatusBar backgroundColor={"#ffffff"} barStyle="dark-content" />
       <Text style={styles.h1}>RecyclApp</Text>
-      <Image source={require("../assets/recyclapp2.png")} style={styles.image}/>
+      <Image
+        source={require("../assets/recyclapp2.png")}
+        style={styles.image}
+      />
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Email"
@@ -121,7 +124,7 @@ const styles = StyleSheet.create({
   },
 
   input: {
-    backgroundColor: "white",
+    backgroundColor: "#ffffff",
     paddingHorizontal: 15,
     paddingVertical: 10,
     borderRadius: 24,
@@ -143,22 +146,22 @@ const styles = StyleSheet.create({
     paddingRight: 32,
   },
   buttonOutline: {
-    backgroundColor: "white",
+    backgroundColor: "#ffffff",
     marginTop: 10,
     borderColor: "#59C81E",
     borderWidth: 2,
   },
   buttonText: {
-    color: "black",
+    color: "#000000",
     fontWeight: "700",
     fontSize: 16,
   },
   buttonOutlineText: {
-    color: "black",
+    color: "#000000",
     fontWeight: "700",
     fontSize: 16,
   },
   image: {
     marginBottom: -15,
-  }
+  },
 });

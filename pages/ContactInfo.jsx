@@ -8,12 +8,8 @@ const ContactInfo = () => {
   const navigation = useNavigation();
 
   const sendMessage = () => {
-    Alert.alert(
-      "",
-      "Your message has been sent",
- 
-    );
-    }
+    Alert.alert("", "Your message has been sent");
+  };
   return (
     <LinearGradient colors={["#8DFAA5", "#99E4F0"]} style={styles.container}>
       <Text style={styles.contactInfoText}>Sign in with Facebook</Text>
@@ -54,7 +50,7 @@ const styles = StyleSheet.create({
     width: "80%",
   },
   input: {
-    backgroundColor: "white",
+    backgroundColor: "#ffffff",
     paddingHorizontal: 15,
     paddingVertical: 10,
     borderRadius: 10,

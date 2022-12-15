@@ -34,7 +34,7 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      <StatusBar backgroundColor={"white"} barStyle="dark-content" />
+      <StatusBar backgroundColor={"#ffffff"} barStyle="dark-content" />
       <View style={styles.image}>
         <Image source={require("../assets/recyclapp2.png")} />
         <Text style={styles.h1}>RecyclApp</Text>
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     margin: -20,
   },
   content: {
-    backgroundColor: "white",
+    backgroundColor: "#ffffff",
     padding: 32,
     borderRadius: 12,
     borderTopRightRadius: 64,
@@ -102,17 +102,17 @@ const styles = StyleSheet.create({
     width: "80%",
   },
   input: {
-    backgroundColor: "white",
+    backgroundColor: "#ffffff",
     paddingHorizontal: 15,
     paddingVertical: 10,
     borderRadius: 24,
     marginTop: 15,
   },
   elevation: {
-    shadowColor: "black",
-    shadowOffset: {width: 15, height: 5},
+    color: "#000000",
+    shadowOffset: { width: 15, height: 5 },
     elevation: 5,
-    shadowOpacity:.1,
+    shadowOpacity: 0.1,
   },
   buttonContainer: {
     width: "100%",
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   buttonOutline: {
-    backgroundColor: "white",
+    backgroundColor: "#ffffff",
     marginTop: 10,
     borderColor: "#59C81E",
     borderWidth: 2,
@@ -141,12 +141,12 @@ const styles = StyleSheet.create({
   buttonText: {
     flex: 2,
     marginLeft: 10,
-    color: "black",
+    color: "#000000",
     fontWeight: "700",
     fontSize: 16,
   },
   buttonOutlineText: {
-    color: "black",
+    color: "#000000",
     fontWeight: "700",
     fontSize: 16,
   },

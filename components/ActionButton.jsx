@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     marginTop: "5%",
   },
   buttonText: {
-    color: "black",
+    color: "#000000",
     fontSize: 20,
   },
   disabledButtonText: {

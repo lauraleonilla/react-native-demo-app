@@ -2,15 +2,21 @@ import React, { useRef, useState, useEffect } from "react";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { GOOGLE_MAPS_KEY } from "@env";
 import MapViewDirections from "react-native-maps-directions";
-import { useSelector } from "react-redux";
-import { selectDestination, selectOrigin } from "../slices/navSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectDestination,
+  selectOrigin,
+  setTravelTimeInformation,
+} from "../slices/navSlice";
 
 const Map = () => {
+  const dispatch = useDispatch();
   const origin = useSelector(selectOrigin);
   const destination = useSelector(selectDestination);
   const [directionsOrigin, setDirectionsOrigin] = useState(null);
   const [directionsDestination, setDirectionsDestination] = useState(null);
   const mapRef = useRef(null);
+
   useEffect(() => {
     if (!origin || !destination) {
       return;
@@ -27,6 +33,7 @@ const Map = () => {
       longitude: destination.location.lng,
     });
   }, [origin, destination]);
+  console.log("LÖÖÖL", directionsOrigin, directionsDestination);
 
   useEffect(() => {
     if (!origin || !destination) {
@@ -38,7 +45,7 @@ const Map = () => {
       )
         .then((res) => res.json())
         .then((data) => {
-          // dispatch(setTravelTimeInformation(data.rows[0].elements[0]));
+          dispatch(setTravelTimeInformation(data.rows[0].elements[0]));
         });
     };
     getTravelTime();
@@ -70,7 +77,7 @@ const Map = () => {
           destination={directionsDestination}
           apikey={GOOGLE_MAPS_KEY}
           strokeWidth={3}
-          strokeColor="black"
+          strokeColor="blue"
         />
       )}
       {origin?.location && (
